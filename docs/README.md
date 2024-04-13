@@ -1,5 +1,9 @@
 # How to Benchmark Vision Foundation Models for Semantic Segmentation?
 
+**Authors:** Tommie Kerssies, Daan de Geus, Gijs Dubbelman  
+**Affiliation:** Eindhoven University of Technology  
+**Contact:** {t.kerssies, d.c.d.geus, g.dubbelman}@tue.nl  
+
 **Published at:** Second Workshop on Foundation Models at CVPR 2024
 
 ## Abstract
