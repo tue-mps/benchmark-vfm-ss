@@ -1,8 +1,3 @@
----
-layout: default
-title: "How to Benchmark Vision Foundation Models for Semantic Segmentation?"
----
-
 # How to Benchmark Vision Foundation Models for Semantic Segmentation?
 
 **Published at:** Second Workshop on Foundation Models at CVPR 2024
