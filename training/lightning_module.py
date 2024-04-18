@@ -270,6 +270,7 @@ class LightningModule(lightning.LightningModule):
         )
 
     @staticmethod
+    @torch.compiler.disable
     def to_per_pixel_targets_semantic(
         targets: list[dict],
         ignore_idx,
