@@ -2,7 +2,7 @@
 
 **Authors:** Tommie Kerssies, Daan de Geus, Gijs Dubbelman  
 **Affiliation:** Eindhoven University of Technology  
-**Contact:** {t.kerssies, d.c.d.geus, g.dubbelman}@tue.nl 
+**Contact:** {t.kerssies, d.c.d.geus, g.dubbelman}@tue.nl
 **Published in:** CVPR 2024 Workshop Proceedings for the Second Workshop on Foundation Models.
 
 ## Abstract
