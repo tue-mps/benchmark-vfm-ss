@@ -59,11 +59,6 @@ class LightningModule(lightning.LightningModule):
             ]
         )
 
-    def init_metrics_panoptic(self, things, stuff, num_metrics):
-        self.metrics = nn.ModuleList(
-            [PanopticQuality(things, stuff) for _ in range(num_metrics)]
-        )
-
     @torch.compiler.disable
     def update_metrics(
         self, preds: list[torch.Tensor], targets: list[torch.Tensor], dataloader_idx
@@ -115,15 +110,6 @@ class LightningModule(lightning.LightningModule):
             self.log(
                 f"{log_prefix}_{metric_idx}_miou", miou_per_dataset[-1], sync_dist=True
             )
-
-    def _on_eval_epoch_end_panoptic(self, log_prefix):
-        pq_per_dataset = []
-        for metric_idx, metric in enumerate(self.metrics):
-            pq = metric.compute()
-            metric.reset()
-
-            pq_per_dataset.append(pq)
-            self.log(f"{log_prefix}_{metric_idx}_pq", pq, sync_dist=True)
 
     def configure_optimizers(self):
         encoder_param_names = {
@@ -299,141 +285,6 @@ class LightningModule(lightning.LightningModule):
 
             for i, mask in enumerate(target["masks"]):
                 per_pixel_target[mask] = target["labels"][i]
-
-            per_pixel_targets.append(per_pixel_target)
-
-        return per_pixel_targets
-
-    def scale_img_size_panoptic(self, size: tuple[int, int]):
-        factor = min(
-            self.img_size[0] / size[0],
-            self.img_size[1] / size[1],
-        )
-
-        return [round(s * factor) for s in size]
-
-    def resize_and_pad_imgs_panoptic(self, imgs):
-        transformed_imgs = []
-        for i in range(len(imgs)):
-            img = resize(imgs[i], self.scale_img_size_panoptic(imgs[i].shape[-2:]))
-
-            pad_h = max(0, self.img_size[-2] - img.shape[-2])
-            pad_w = max(0, self.img_size[-1] - img.shape[-1])
-            padding = [0, 0, pad_w, pad_h]
-
-            img = pad(img, padding)
-
-            transformed_imgs.append(img)
-
-        return torch.stack(transformed_imgs), [img.shape[-2:] for img in imgs]
-
-    def revert_resize_and_pad_logits_panoptic(self, transformed_logits, img_sizes):
-        logits = []
-        for i in range(len(transformed_logits)):
-            scaled_size = self.scale_img_size_panoptic(img_sizes[i])
-            logits_i = transformed_logits[i][:, : scaled_size[0], : scaled_size[1]]
-            logits_i = interpolate(logits_i[None, ...], img_sizes[i], mode="bilinear")[
-                0
-            ]
-            logits.append(logits_i)
-
-        return logits
-
-    @staticmethod
-    def to_per_pixel_preds_panoptic(
-        mask_logits_list, class_logits, stuff_classes, mask_thresh, overlap_thresh
-    ):
-        scores, classes = class_logits.softmax(dim=-1).max(-1)
-        preds_list = []
-
-        for i in range(len(mask_logits_list)):
-            keep = classes[i].ne(class_logits.shape[-1] - 1) & (scores[i] > mask_thresh)
-            if not keep.any():
-                preds_list.append(
-                    torch.zeros(
-                        (*mask_logits_list[i].shape[-2:], 2),
-                        dtype=class_logits.dtype,
-                        device=class_logits.device,
-                    )
-                )
-                continue
-
-            segments = torch.zeros(
-                *mask_logits_list[i].shape[-2:],
-                dtype=class_logits.dtype,
-                device=class_logits.device,
-            )
-            masks = mask_logits_list[i].sigmoid()
-            mask_ids = (scores[i][keep][..., None, None] * masks[keep]).argmax(0)
-            segment_and_class_ids, stuff_segment_ids, segment_id = [], {}, 1
-
-            for k in range(classes[i][keep].shape[0]):
-                class_id = classes[i][keep][k].item()
-
-                mask_area = (mask_ids == k).sum().item()
-                if mask_area == 0:
-                    continue
-
-                original_area = (masks[keep][k] >= 0.5).sum().item()
-                if original_area == 0:
-                    continue
-
-                mask = (mask_ids == k) & (masks[keep][k] >= 0.5)
-                if mask.sum().item() == 0:
-                    continue
-
-                if mask_area / original_area < overlap_thresh:
-                    continue
-
-                if class_id in stuff_classes and class_id in stuff_segment_ids:
-                    segments[mask] = stuff_segment_ids[class_id]
-                    continue
-
-                segments[mask] = segment_id
-
-                segment_and_class_ids.append((segment_id, class_id))
-
-                if class_id in stuff_segment_ids:
-                    stuff_segment_ids[class_id] = segment_id
-
-                segment_id += 1
-
-            preds = torch.zeros(
-                (*masks.shape[-2:], 2),
-                dtype=segments.dtype,
-                device=segments.device,
-            )
-
-            for segment_id, class_id in segment_and_class_ids:
-                segment_mask = segments == segment_id
-                preds[:, :, 0] = torch.where(segment_mask, class_id, preds[:, :, 0])
-                preds[:, :, 1] = torch.where(segment_mask, segment_id, preds[:, :, 1])
-
-            preds_list.append(preds)
-
-        return preds_list
-
-    @staticmethod
-    @torch.compiler.disable
-    def to_per_pixel_targets_panoptic(targets: list[dict]):
-        per_pixel_targets = []
-        for target in targets:
-            per_pixel_target = torch.zeros(
-                (*target["masks"].shape[-2:], 2),
-                dtype=target["labels"].dtype,
-                device=target["labels"].device,
-            )
-
-            for i, mask in enumerate(target["masks"]):
-                per_pixel_target[:, :, 0] = torch.where(
-                    mask, target["labels"][i], per_pixel_target[:, :, 0]
-                )
-
-                per_pixel_target[:, :, 1] = torch.where(
-                    mask,
-                    torch.tensor(i + 1, device=target["masks"].device),
-                    per_pixel_target[:, :, 1],
-                )
 
             per_pixel_targets.append(per_pixel_target)
 
