@@ -1,4 +1,4 @@
-# Benchmarking Vision Foundation Models for Semantic Segmentation
+# How to Benchmark Vision Foundation Models for Semantic Segmentation?
 
 **Authors:** Tommie Kerssies, Daan de Geus, Gijs Dubbelman  
 **Affiliation:** Eindhoven University of Technology  
@@ -13,7 +13,7 @@ Recent vision foundation models (VFMs) have demonstrated proficiency in various 
 ```bibtex
 @inproceedings{kerssies2024benchmarking,
   author={Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs},
-  title={Benchmarking Vision Foundation Models for Semantic Segmentation},
+  title={How to Benchmark Vision Foundation Models for Semantic Segmentation?},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
   year={2024},
 }
