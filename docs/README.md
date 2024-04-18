@@ -3,7 +3,7 @@
 **Authors:** Tommie Kerssies, Daan de Geus, Gijs Dubbelman  
 **Affiliation:** Eindhoven University of Technology  
 **Contact:** {t.kerssies, d.c.d.geus, g.dubbelman}@tue.nl  
-**Publication:** CVPR 2024 Workshop Proceedings for the Second Workshop on Foundation Models
+**Publication:** CVPR 2024 Workshop Proceedings for the Second Workshop on Foundation Models  
 **Code**: [GitHub Repository](https://github.com/tue-mps/benchmark-vfm-ss)
 
 ## Abstract
