@@ -1,0 +1,13 @@
+trainer:
+  max_steps: 40000
+  val_check_interval: 1000
+  check_val_every_n_epoch: ~
+  logger:
+    class_path: lightning.pytorch.loggers.wandb.WandbLogger
+model:
+  class_path: training.mask2former_semantic.Mask2formerSemantic
+  init_args:
+    network:
+      class_path: models.mask2former_decoder.Mask2formerDecoder
+data:
+  class_path: datasets.ade20k.ADE20K
