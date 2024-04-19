@@ -40,7 +40,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Default setup:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/bfc289da-5572-4923-96cb-789ae2dd2dd4">  
-  
+<br>
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -54,7 +54,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Freezing the encoder:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/c3523c81-27c1-40fd-a850-adde67367baa">  
-  
+<br>
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile --model.freeze_encoder True```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile --model.freeze_encoder True```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2 --model.freeze_encoder True```  
@@ -68,7 +68,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Changing the decoder:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/6d54d1cc-2bc3-49f0-b8de-0398d1661b36">  
-  
+<br>  
 - ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 - ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```   
 - ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -82,7 +82,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Scaling the model:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/c4f8a01e-766e-45a2-9647-d1e50f4fe424">  
-  
+<br>
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_large_patch14_clip_336.merged2b --no_compile```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_large_patch14_224.mim_m38m --no_compile```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_large_patch14_dinov2```  
@@ -96,7 +96,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Varying the patch size:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/4314f4e0-1d0b-4c16-b7fa-322fc398c871">  
-  
+<br>
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile --model.network.patch_size 8```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 - ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2  --model.network.patch_size 8```  
@@ -110,7 +110,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Changing the downstream dataset (PASCAL VOC):  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/9ea2035a-707e-4284-bcb9-14dc5c96a9c4">  
-  
+<br>
 - ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 - ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 - ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -124,7 +124,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Changing the downstream dataset (Cityscapes):  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/4b4295d6-6aae-4bba-a70a-09f133ff871d">  
-  
+<br>
 - ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 - ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 - ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -138,7 +138,7 @@ Please note that compiling results in worse performance for EVA02 for some reaso
 
 ### Introducing a domain shift:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/e6dfaf1f-b37e-4c09-aeef-7df0fde9bfd2">  
-  
+<br>
 - ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 - ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 - ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
