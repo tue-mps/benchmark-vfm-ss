@@ -4,7 +4,7 @@
 **Affiliation:** Eindhoven University of Technology  
 **Contact:** {t.kerssies, d.c.d.geus, g.dubbelman}@tue.nl  
 **Publication:** CVPR 2024 Workshop Proceedings for the Second Workshop on Foundation Models  
-**Paper:** [arXiv](https://arxiv.org/abs/2404.12172)
+**Paper:** [arXiv](https://arxiv.org/abs/2404.12172)  
 **Code**: [GitHub](https://github.com/tue-mps/benchmark-vfm-ss)
 
 ## Abstract
