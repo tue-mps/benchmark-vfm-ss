@@ -30,13 +30,15 @@
    (replace ```/data``` with the folder where you stored the datasets)  
 
 ## Reproducing results from the paper
-If using the BEiT models, download their checkpoints and convert them to timm format using ```convert_beit_ckpt.ipynb```.
+For the commands below, add `--root` to specify the path to where the datasets and checkpoints are stored and `--data.num_workers` to specify the number of workers for data     loading.
+
+If using the BEiT models, download their checkpoints and convert them to timm format using `convert_beit_ckpt.ipynb`.
 - **Base**: [Download](https://github.com/addf400/files/releases/download/beit3/beit3_base_patch16_224.pth)
 - **Large**: [Download](https://github.com/addf400/files/releases/download/beit3/beit3_large_patch16_224.pth)
 
-For the commands below, add `--root` to specify the path to where the datasets and checkpoints are stored and `--data.num_workers` to specify the number of workers for data     loading.
-
-Please note that compiling results in worse performance for EVA02 for some reason and BEiT models use sub norm.
+Please note that:
+- BEiT models need a checkpoint from above (which is loaded with `--model.network.ckpt_path`) and apply layernorm slightly differently (so the architecture is modified with `--model.network.sub_norm`).
+- EVA02 models somehow show significantly lower mIoU when using `torch.compile` (so it is turned off with `--no_compile`).
 
 ### Default setup:  
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/bfc289da-5572-4923-96cb-789ae2dd2dd4"><br>
