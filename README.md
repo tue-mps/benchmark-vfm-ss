@@ -1,5 +1,4 @@
-# Code for "How to Benchmark Vision Foundation Models for Semantic Segmentation?"
-[arXiv](https://arxiv.org/abs/2404.12172)  
+# Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://arxiv.org/abs/2404.12172)
 <img width="600" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/5a917336-1205-4e19-a74c-efb36e4cfa20">
 
 ## Getting started
