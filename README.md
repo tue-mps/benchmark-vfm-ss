@@ -22,7 +22,7 @@
     ```
     (replace with your CUDA version if not 12.3).
 
-4. **Fine-tune a model**
+4. **Fine-tune a model:**  
    Here's an example for fine-tuning DINOv2 with the default setup on GPU 0 with 1 worker for data loading (replace ```/data``` with the folder where you stored the datasets)
    ```python main.py fit -c configs/ade20k_linear_semantic.yaml --root /data --data.num_workers 1 --trainer.devices [0] --model.network.encoder_name vit_base_patch14_dinov2```
 
