@@ -1,3 +1,7 @@
+# Code for "How to Benchmark Vision Foundation Models for Semantic Segmentation?"
+<img width="652" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/5a917336-1205-4e19-a74c-efb36e4cfa20">
+
+
 ## Getting started
 1. **Download datasets**:
     Downloading is optional depending on which datasets you intend to use.
@@ -19,15 +23,18 @@
     ```
     (replace with your CUDA version if not 12.3).
 
-4. **Download and convert BEiT-3 checkpoints**:
-   Checkpoints are optional and only necessary if using BEiT models. Convert them to timm format using ```convert_beit_ckpt.ipynb```.
+4. **Fine-tune a model**
+   Here's an example for fine-tuning DINOv2 with the default setup on GPU 0 with 1 worker for data loading (replace ```/data``` with the folder where you stored the datasets)
+   ```python main.py fit -c configs/ade20k_linear_semantic.yaml --root /data --data.num_workers 1 --trainer.devices [0] --model.network.encoder_name vit_base_patch14_dinov2```
+
+## Reproducing results from the paper
+    If using the BEiT models, download their checkpoints and convert them to timm format using ```convert_beit_ckpt.ipynb```.
     - **Base**: [Download](https://github.com/addf400/files/releases/download/beit3/beit3_base_patch16_224.pth)
     - **Large**: [Download](https://github.com/addf400/files/releases/download/beit3/beit3_large_patch16_224.pth)
-
-5. **Benchmarking instructions**:
-    Add `--root` to specify the path to where the datasets and checkpoints are stored and `--data.num_workers` to specify the number of workers for data loading.
     
-    (Please note that compiling results in worse performance for EVA02 for some reason and BEiT models use sub norm.)
+    For the commands below, add `--root` to specify the path to where the datasets and checkpoints are stored and `--data.num_workers` to specify the number of workers for data     loading.
+    
+    Please note that compiling results in worse performance for EVA02 for some reason and BEiT models use sub norm.
 
     ### Default setup:  
     ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
