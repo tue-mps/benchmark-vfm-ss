@@ -1,4 +1,4 @@
-# Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR 2024 2nd Workshop on Foundation Models)
+# Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR 2024 Second Workshop on Foundation Models)
 <img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/365962f3-5948-40d7-ae90-256c863ae56c">
 
 ## Getting started
