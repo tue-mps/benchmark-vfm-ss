@@ -31,10 +31,15 @@ def _should_check_val_fx(self: _TrainingEpochLoop, data_fetcher: _DataFetcher) -
             self.batch_idx + 1
         ) % self.trainer.limit_train_batches == 0
     elif self.trainer.val_check_batch != float("inf"):
-        # modified below to check val based on global steps instead of batches
-        is_val_check_batch = (
-            self.global_step
-        ) % self.trainer.val_check_batch == 0 and not self._should_accumulate()
+        if self.trainer.check_val_every_n_epoch is not None:
+            is_val_check_batch = (
+                self.batch_idx + 1
+            ) % self.trainer.val_check_batch == 0
+        else:
+            # added below to check val based on global steps instead of batches in case of iteration based val check
+            is_val_check_batch = (
+                self.global_step
+            ) % self.trainer.val_check_batch == 0 and not self._should_accumulate()
 
     return is_val_check_batch
 
