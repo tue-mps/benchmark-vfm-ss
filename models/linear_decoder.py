@@ -7,24 +7,23 @@ import torch
 class LinearDecoder(Encoder):
     def __init__(
         self,
-        encoder_name,
+        model_name,
+        pretrained,
         num_classes,
         img_size,
-        sub_norm=False,
-        patch_size=16,
-        pretrained=True,
-        ckpt_path="",
+        patch_size=32,
     ):
         super().__init__(
-            encoder_name=encoder_name,
-            img_size=img_size,
-            sub_norm=sub_norm,
-            patch_size=patch_size,
+            model_name=model_name,
             pretrained=pretrained,
-            ckpt_path=ckpt_path,
+            img_size=img_size,
+            patch_size=patch_size,
         )
 
-        self.head = nn.Linear(self.embed_dim, num_classes)
+        self.head = nn.Sequential(
+            nn.LayerNorm(self.embed_dim),
+            nn.Linear(self.embed_dim, num_classes),
+        )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = super().forward(x)

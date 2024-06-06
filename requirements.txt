@@ -9,3 +9,4 @@ scipy==1.12.0
 torch==2.2.2
 torchvision==0.17.2
 ipykernel==6.29.4
+open_clip_torch==2.24.0

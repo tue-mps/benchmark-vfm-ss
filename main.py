@@ -31,10 +31,15 @@ def _should_check_val_fx(self: _TrainingEpochLoop, data_fetcher: _DataFetcher) -
             self.batch_idx + 1
         ) % self.trainer.limit_train_batches == 0
     elif self.trainer.val_check_batch != float("inf"):
-        # modified below to check val based on global steps instead of batches
-        is_val_check_batch = (
-            self.global_step
-        ) % self.trainer.val_check_batch == 0 and not self._should_accumulate()
+        if self.trainer.check_val_every_n_epoch is not None:
+            is_val_check_batch = (
+                self.batch_idx + 1
+            ) % self.trainer.val_check_batch == 0
+        else:
+            # added below to check val based on global steps instead of batches in case of iteration based val check
+            is_val_check_batch = (
+                self.global_step
+            ) % self.trainer.val_check_batch == 0 and not self._should_accumulate()
 
     return is_val_check_batch
 
@@ -51,8 +56,6 @@ class LightningCLI(cli.LightningCLI):
         parser.add_argument("--root", type=str)
         parser.link_arguments("root", "data.init_args.root")
         parser.link_arguments("root", "trainer.logger.init_args.save_dir")
-
-        parser.add_argument("--no_compile", action="store_true")
 
         parser.link_arguments("trainer.devices", "data.init_args.devices")
 
@@ -87,9 +90,6 @@ class LightningCLI(cli.LightningCLI):
             _should_check_val_fx, self.trainer.fit_loop.epoch_loop
         )
 
-        if not self.config[self.config["subcommand"]]["no_compile"]:  # type: ignore
-            model = torch.compile(model)
-
         self.trainer.fit(model, **kwargs)  # type: ignore
 
 
@@ -105,9 +105,10 @@ def cli_main():
             "precision": "16-mixed",
             "log_every_n_steps": 1,
             "enable_model_summary": False,
-            "callbacks": [ModelSummary(max_depth=2)],
-            "devices": 1,
-            "accumulate_grad_batches": 16,
+            "callbacks": [ModelSummary(max_depth=4)],
+            "devices": 4,
+            "accumulate_grad_batches": 4,
+            "strategy": "ddp_find_unused_parameters_true",
         },
     )
 
