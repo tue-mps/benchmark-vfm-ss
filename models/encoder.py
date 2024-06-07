@@ -28,8 +28,8 @@ class Encoder(nn.Module):
             1, -1, 1, 1
         )
 
-        self.register_buffer("pixel_mean", pixel_mean, persistent=False)
-        self.register_buffer("pixel_std", pixel_std, persistent=False)
+        self.register_buffer("pixel_mean", pixel_mean)
+        self.register_buffer("pixel_std", pixel_std)
 
         if hasattr(self.encoder, "trunk"):
             self.encoder = self.encoder.trunk
