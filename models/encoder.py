@@ -30,6 +30,12 @@ class Encoder(nn.Module):
         }
         self.encoder = timm.create_model(**model_kwargs)
 
+        pixel_mean = torch.tensor(self.encoder.default_cfg["mean"]).reshape(1, -1, 1, 1)
+        pixel_std = torch.tensor(self.encoder.default_cfg["std"]).reshape(1, -1, 1, 1)
+
+        self.register_buffer("pixel_mean", pixel_mean)
+        self.register_buffer("pixel_std", pixel_std)
+
         self.grid_size = tuple(round(size / patch_size) for size in img_size)
 
         self.embed_dim = (
@@ -176,6 +182,8 @@ class Encoder(nn.Module):
         return nn.Parameter(rel_pos)
 
     def forward(self, x: torch.Tensor):
+        x = (x - self.pixel_mean) / self.pixel_std
+
         x = self.encoder.forward_features(x)
 
         if x.dim() == 4:
