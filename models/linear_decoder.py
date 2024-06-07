@@ -20,10 +20,7 @@ class LinearDecoder(Encoder):
             patch_size=patch_size,
         )
 
-        self.head = nn.Sequential(
-            nn.LayerNorm(self.embed_dim),
-            nn.Linear(self.embed_dim, num_classes),
-        )
+        self.head = nn.Linear(self.embed_dim, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = super().forward(x)
