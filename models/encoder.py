@@ -34,18 +34,18 @@ class Encoder(nn.Module):
         if hasattr(self.encoder, "trunk"):
             self.encoder = self.encoder.trunk
 
-        if hasattr(self.encoder, "norm"):
-            self.encoder.norm = nn.Identity()
-
-        if hasattr(self.encoder, "norm_pre"):
-            self.encoder.norm_pre = nn.Identity()
-
         if hasattr(self.encoder, "embed_dim"):
             self.embed_dim = self.encoder.embed_dim
         elif hasattr(self.encoder, "num_features"):
             self.embed_dim = self.encoder.num_features
         elif hasattr(self.encoder, "transformer"):
             self.embed_dim = self.encoder.transformer.width
+
+        if hasattr(self.encoder, "norm"):
+            self.encoder.norm = nn.Identity()
+
+        if hasattr(self.encoder, "norm_pre"):
+            self.encoder.norm_pre = nn.Identity()
 
         self.grid_size = tuple(round(size / patch_size) for size in img_size)
 
