@@ -11,7 +11,7 @@ class LinearDecoder(Encoder):
         pretrained,
         num_classes,
         img_size,
-        patch_size=32,
+        patch_size=16,
     ):
         super().__init__(
             model_name=model_name,

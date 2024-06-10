@@ -41,12 +41,6 @@ class Encoder(nn.Module):
         elif hasattr(self.encoder, "transformer"):
             self.embed_dim = self.encoder.transformer.width
 
-        if hasattr(self.encoder, "norm"):
-            self.encoder.norm = nn.Identity()
-
-        if hasattr(self.encoder, "norm_pre"):
-            self.encoder.norm_pre = nn.Identity()
-
         self.grid_size = tuple(round(size / patch_size) for size in img_size)
 
         if hasattr(self.encoder, "patch_embed"):
@@ -164,6 +158,14 @@ class Encoder(nn.Module):
             x = x.permute(1, 0, 2)
             x = self.encoder.transformer(x)
             x = x.permute(1, 0, 2)
+
+            if (
+                self.encoder.attn_pool is None and not self.encoder.final_ln_after_pool
+            ) or (
+                self.encoder.attn_pool is not None
+                and self.encoder.attn_pool_contrastive is not None
+            ):
+                x = self.encoder.ln_post(x)
 
         if x.dim() == 4:
             x = x.flatten(2).transpose(1, 2)
