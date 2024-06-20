@@ -1,5 +1,4 @@
 # Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR 2024 Second Workshop on Foundation Models)
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/365962f3-5948-40d7-ae90-256c863ae56c">
 
 ## Getting started
 1. **Download datasets.**
@@ -41,7 +40,6 @@ Please note that:
 - EVA02 models somehow show significantly lower mIoU when using `torch.compile` (so it is turned off with `--no_compile`).
 
 ### Default setup:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/bfc289da-5572-4923-96cb-789ae2dd2dd4"><br>
 1. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 2. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 3. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -54,7 +52,6 @@ Please note that:
 10. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
 
 ### Freezing the encoder:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/c3523c81-27c1-40fd-a850-adde67367baa"><br>
 1. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile --model.freeze_encoder True```  
 2. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile --model.freeze_encoder True```  
 3. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2 --model.freeze_encoder True```  
@@ -67,7 +64,6 @@ Please note that:
 10. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b --model.freeze_encoder True```  
 
 ### Changing the decoder:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/6d54d1cc-2bc3-49f0-b8de-0398d1661b36"><br>
 1. ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 2. ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```   
 3. ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -80,7 +76,6 @@ Please note that:
 10. ```python main.py fit -c configs/ade20k_mask2former_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
 
 ### Scaling the model:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/c4f8a01e-766e-45a2-9647-d1e50f4fe424"><br>
 1. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_large_patch14_clip_336.merged2b --no_compile```  
 2. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_large_patch14_224.mim_m38m --no_compile```  
 3. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_large_patch14_dinov2```  
@@ -93,7 +88,6 @@ Please note that:
 10. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name samvit_large_patch16.sa1b```  
 
 ### Varying the patch size:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/4314f4e0-1d0b-4c16-b7fa-322fc398c871"><br>
 1. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile --model.network.patch_size 8```  
 2. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 3. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2  --model.network.patch_size 8```  
@@ -106,7 +100,6 @@ Please note that:
 10. ```python main.py fit -c configs/ade20k_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b --model.network.patch_size 8```  
 
 ### Changing the downstream dataset (PASCAL VOC):  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/9ea2035a-707e-4284-bcb9-14dc5c96a9c4"><br>
 1. ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 2. ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 3. ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -119,7 +112,6 @@ Please note that:
 10. ```python main.py fit -c configs/pascal_voc_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
 
 ### Changing the downstream dataset (Cityscapes):  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/4b4295d6-6aae-4bba-a70a-09f133ff871d"><br>
 1. ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 2. ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 3. ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
@@ -132,7 +124,6 @@ Please note that:
 10. ```python main.py fit -c configs/cityscapes_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
 
 ### Introducing a domain shift:  
-<img width="400" alt="image" src="https://github.com/tue-mps/benchmark-vfm-ss/assets/6392002/e6dfaf1f-b37e-4c09-aeef-7df0fde9bfd2"><br>
 1. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name eva02_base_patch16_clip_224.merged2b --no_compile```  
 2. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name eva02_base_patch14_224.mim_in22k --no_compile```  
 3. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name vit_base_patch14_dinov2```  
