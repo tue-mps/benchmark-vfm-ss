@@ -35,22 +35,6 @@ class UrbanScenes(LightningDataModule):
         self.transforms = Transforms(self.img_size, scale_range)
 
     def setup(self, stage: Union[str, None] = None) -> LightningDataModule:
-        gta5_train_datasets = [
-            Dataset(
-                zip_path=Path(self.root, f"{i:02}_images.zip"),
-                target_zip_path=Path(self.root, f"{i:02}_labels.zip"),
-                img_folder_path_in_zip=Path("./images"),
-                target_folder_path_in_zip=Path("./labels"),
-                img_suffix=".png",
-                target_suffix=".png",
-                class_mapping=get_cityscapes_mapping(),
-                ignore_idx=self.ignore_idx,
-                transforms=self.transforms,
-            )
-            for i in range(1, 11)
-        ]
-        self.gta5_train_dataset = ConcatDataset(gta5_train_datasets)
-
         cityscapes_dataset_kwargs = {
             "img_suffix": ".png",
             "target_suffix": ".png",
