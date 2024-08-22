@@ -1,0 +1,11 @@
+trainer:
+  max_epochs: 40
+  logger:
+    class_path: lightning.pytorch.loggers.wandb.WandbLogger
+model:
+  class_path: training.linear_semantic.LinearSemantic
+  init_args:
+    network:
+      class_path: models.upscale_decoder.UpscaleDecoder
+data:
+  class_path: datasets.cityscapes.Cityscapes

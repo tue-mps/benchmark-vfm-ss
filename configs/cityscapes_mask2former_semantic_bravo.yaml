@@ -1,0 +1,11 @@
+trainer:
+  max_epochs: 40
+  logger:
+    class_path: lightning.pytorch.loggers.wandb.WandbLogger
+model:
+  class_path: training.mask2former_semantic.Mask2formerSemantic
+  init_args:
+    network:
+      class_path: models.mask2former_decoder.Mask2formerDecoder
+data:
+  class_path: datasets.cityscapes.Cityscapes

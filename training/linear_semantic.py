@@ -89,6 +89,9 @@ class LinearSemantic(LightningModule):
     def configure_optimizers(self):
         optimizer = super().configure_optimizers()
 
+        if self.trainer.estimated_stepping_batches == float("inf"):
+            return optimizer
+
         lr_scheduler = {
             "scheduler": PolynomialLR(
                 optimizer,
