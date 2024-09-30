@@ -1,6 +1,6 @@
 # Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR 2024 Second Workshop on Foundation Models)
 
-## 🚀 Update: Code used for BRAVO Challenge at ECCV 2024 ([Paper](https://arxiv.org/pdf/2409.17208))
+### 🚀 Code used for 1st place in BRAVO Challenge at ECCV'24 on robustness ([Submission report](https://arxiv.org/abs/2409.17208), [Workshop paper](https://arxiv.org/abs/2409.15107))
 
 ## Getting started
 1. **Download datasets.**
