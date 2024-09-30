@@ -1,5 +1,7 @@
 # Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR 2024 Second Workshop on Foundation Models)
 
+## 🚀 Update: Code used for BRAVO Challenge at ECCV 2024 ([Paper](https://arxiv.org/pdf/2409.17208))
+
 ## Getting started
 1. **Download datasets.**
     Downloading is optional depending on which datasets you intend to use.
@@ -134,6 +136,27 @@ Please note that:
 8. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name deit3_base_patch16_384.fb_in1k```  
 9. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name vit_base_patch16_224.mae```  
 10. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
+
+### 📄 Citation
+If you use this code in your research or project, please cite the related paper(s):
+
+```bibtex
+@inproceedings{kerssies2024benchmarking,
+  author={Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs},
+  title={How to Benchmark Vision Foundation Models for Semantic Segmentation?},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year={2024},
+}
+```
+
+```bibtex
+@inproceedings{vu2024bravo,
+  author={Vu, Tuan-Hung and Valle, Eduardo and Bursuc, Andrei and Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs and Qian, Long and Zhu, Bingke and Chen, Yingying and Tang, Ming and Wang, Jinqiao and Vojíř, Tomáš and Šochman, Jan and Matas, Jiří and Smith, Michael and Ferrie, Frank and Basu, Shamik and Sakaridis, Christos and Van Gool, Luc},
+  title={The BRAVO Semantic Segmentation Challenge Results in UNCV2024},
+  booktitle={ECCV},
+  year={2024}
+}
+```
 
 ## Acknowledgement
 We borrow some code from Hugging Face Transformers (https://github.com/huggingface/transformers) (Apache-2.0 License)
