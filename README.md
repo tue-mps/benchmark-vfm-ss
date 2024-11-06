@@ -149,12 +149,23 @@ If you use this code in your research or project, please cite the related paper(
 }
 ```
 
+```
+@article{kerssies2022evaluating,
+  title = {First Place Solution to the ECCV 2024 BRAVO Challenge: Evaluating Robustness of Vision Foundation Models for Semantic Segmentation},
+  author = {Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs},
+  journal = {arXiv preprint arXiv:2409.17208},
+  year = {2024},
+  month = sep,
+}
+```
+
 ```bibtex
 @inproceedings{vu2024bravo,
-  author={Vu, Tuan-Hung and Valle, Eduardo and Bursuc, Andrei and Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs and Qian, Long and Zhu, Bingke and Chen, Yingying and Tang, Ming and Wang, Jinqiao and Vojíř, Tomáš and Šochman, Jan and Matas, Jiří and Smith, Michael and Ferrie, Frank and Basu, Shamik and Sakaridis, Christos and Van Gool, Luc},
-  title={The BRAVO Semantic Segmentation Challenge Results in UNCV2024},
-  booktitle={ECCV},
-  year={2024}
+  title = {The BRAVO Semantic Segmentation Challenge Results in UNCV2024},
+  author = {Vu, Tuan-Hung and Valle, Eduardo and Bursuc, Andrei and Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs and Qian, Long and Zhu, Bingke and Chen, Yingying and Tang, Ming and Wang, Jinqiao and Vojíř, Tomáš and Šochman, Jan and Matas, Jiří and Smith, Michael and Ferrie, Frank and Basu, Shamik and Sakaridis, Christos and Van Gool, Luc},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV) Workshops},
+  year = {2024},
+  month = sep,
 }
 ```
 
