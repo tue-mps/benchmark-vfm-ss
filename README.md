@@ -137,7 +137,7 @@ Please note that:
 9. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name vit_base_patch16_224.mae```  
 10. ```python main.py fit -c configs/gta5_linear_semantic.yaml --model.network.encoder_name samvit_base_patch16.sa1b```  
 
-### 📄 Citation
+## 📄 Citation
 If you use this code in your research or project, please cite the related paper(s):
 
 ```bibtex
