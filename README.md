@@ -155,7 +155,6 @@ If you use this code in your research or project, please cite the related paper(
   author = {Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs},
   journal = {arXiv preprint arXiv:2409.17208},
   year = {2024},
-  month = sep,
 }
 ```
 
@@ -165,7 +164,6 @@ If you use this code in your research or project, please cite the related paper(
   author = {Vu, Tuan-Hung and Valle, Eduardo and Bursuc, Andrei and Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs and Qian, Long and Zhu, Bingke and Chen, Yingying and Tang, Ming and Wang, Jinqiao and Vojíř, Tomáš and Šochman, Jan and Matas, Jiří and Smith, Michael and Ferrie, Frank and Basu, Shamik and Sakaridis, Christos and Van Gool, Luc},
   booktitle = {Proceedings of the European Conference on Computer Vision (ECCV) Workshops},
   year = {2024},
-  month = sep,
 }
 ```
 
