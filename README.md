@@ -150,7 +150,7 @@ If you use this code in your research or project, please cite the related paper(
 ```
 
 ```bibtex
-@article{kerssies2022evaluating,
+@article{kerssies2024evaluating,
   title = {First Place Solution to the ECCV 2024 BRAVO Challenge: Evaluating Robustness of Vision Foundation Models for Semantic Segmentation},
   author = {Kerssies, Tommie and de Geus, Daan and Dubbelman, Gijs},
   journal = {arXiv preprint arXiv:2409.17208},
