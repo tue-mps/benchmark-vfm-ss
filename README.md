@@ -1,6 +1,8 @@
-# Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR'24 Second Workshop on Foundation Models)
+# Code for ["How to Benchmark Vision Foundation Models for Semantic Segmentation?"](https://tue-mps.github.io/benchmark-vfm-ss/) (CVPR'24 Foundation Models Workshop)
 
-**September 30, 2024** – 🚀 Code used to achieve **1st place** in ECCV'24 BRAVO Challenge ([Submission report](https://arxiv.org/abs/2409.17208), [Workshop paper](https://arxiv.org/abs/2409.15107))
+📢 **March 26, 2025** — Released our follow-up work: [Encoder-only Mask Transformer (EoMT)](https://www.tue-mps.org/eomt/)
+
+🥇 **September 30, 2024** — 1st place in ECCV'24 BRAVO Challenge! [Submission report](https://arxiv.org/abs/2409.17208) · [Workshop paper](https://arxiv.org/abs/2409.15107)
 
 ## Getting started
 1. **Download datasets.**
