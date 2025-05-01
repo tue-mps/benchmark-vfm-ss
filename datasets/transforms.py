@@ -1,4 +1,3 @@
-from typing import Tuple
 import torch
 from torchvision.transforms import v2 as T
 from torchvision.transforms.v2 import functional as F
@@ -18,7 +17,6 @@ class Transforms(nn.Module):
         super().__init__()
 
         self.img_size = img_size
-
         self.max_brightness_factor = max_brightness_delta / 255.0
         self.max_contrast_factor = max_contrast_factor
         self.max_saturation_factor = saturation_factor
@@ -29,7 +27,6 @@ class Transforms(nn.Module):
         self.scale_jitter = T.ScaleJitter(
             target_size=img_size,
             scale_range=scale_range,
-            antialias=True,
         )
 
         self.random_crop = T.RandomCrop(img_size)
@@ -91,27 +88,30 @@ class Transforms(nn.Module):
 
         return img, target
 
-    def crop(self, img, target: dict):
-        img_crop, target_crop = self.random_crop(img, target)
+    def forward(self, img, target: dict):
+        img_ = img.clone()
+        target_ = {
+            "masks": target["masks"].clone(),
+            "labels": target["labels"].clone(),
+        }
 
-        mask_sums = target_crop["masks"].sum(dim=[-2, -1])
+        img_ = self.color_jitter(img_)
+
+        img_, target_ = self.random_horizontal_flip(img_, target_)
+
+        img_, target_ = self.scale_jitter(img_, target_)
+
+        img_, target_ = self.pad(img_, target_)
+
+        img_, target_ = self.random_crop(img_, target_)
+
+        mask_sums = target_["masks"].sum(dim=[-2, -1])
         non_empty_mask = mask_sums > 0
 
         if non_empty_mask.sum() == 0:
-            return self.crop(img, target)
+            return self(img, target)
 
-        target_crop["masks"] = target_crop["masks"][non_empty_mask]
-        target_crop["labels"] = target_crop["labels"][non_empty_mask]
+        target_["masks"] = target_["masks"][non_empty_mask]
+        target_["labels"] = target_["labels"][non_empty_mask]
 
-        return img_crop, target_crop
-
-    def forward(self, img, target: dict):
-        img = self.color_jitter(img)
-
-        img, target = self.random_horizontal_flip(img, target)
-
-        img, target = self.scale_jitter(img, target)
-
-        img, target = self.pad(img, target)
-
-        return self.crop(img, target)
+        return img_, target_

@@ -1,9 +1,9 @@
 trainer:
-  max_epochs: 32
+  max_epochs: 31
   logger:
     class_path: lightning.pytorch.loggers.wandb.WandbLogger
 model:
-  class_path: training.linear_semantic.LinearSemantic
+  class_path: training.semantic.Semantic
   init_args:
     network:
       class_path: models.linear_decoder.LinearDecoder

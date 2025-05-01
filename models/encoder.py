@@ -1,25 +1,24 @@
 import torch
 import torch.nn as nn
-from timm.layers import (
-    resample_patch_embed,
-    resample_abs_pos_embed,
-)
+from pathlib import Path
+import open_clip.factory as _fc
+from functools import partial
+from open_clip import create_model_from_pretrained, get_model_config
 import timm
-from open_clip import create_model_from_pretrained
-from open_clip.factory import get_model_config
+from timm.layers import resample_patch_embed, resample_abs_pos_embed
+
+_fc.load_checkpoint = partial(_fc.load_checkpoint, strict=False)
+
+for p in Path(__file__).parent.joinpath("configs").glob("*.json"):
+    _fc.add_model_config(p)
 
 
 class Encoder(nn.Module):
-    def __init__(
-        self,
-        model_name,
-        pretrained,
-        img_size: tuple[int, int],
-        patch_size,
-    ):
+    def __init__(self, model_name, pretrained, img_size: tuple[int, int], patch_size):
         super().__init__()
-
-        self.encoder = create_model_from_pretrained(model_name, pretrained)[0].visual
+        self.encoder = create_model_from_pretrained(
+            model_name, pretrained, load_weights_only=False
+        )[0].visual
 
         pixel_mean = torch.tensor(self.encoder.preprocess_cfg["mean"]).reshape(
             1, -1, 1, 1
@@ -155,9 +154,7 @@ class Encoder(nn.Module):
             x = x + self.encoder.positional_embedding.to(x.dtype)
             x = self.encoder.patch_dropout(x)
             x = self.encoder.ln_pre(x)
-            x = x.permute(1, 0, 2)
             x = self.encoder.transformer(x)
-            x = x.permute(1, 0, 2)
 
             if (
                 self.encoder.attn_pool is None and not self.encoder.final_ln_after_pool

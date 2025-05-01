@@ -18,6 +18,9 @@ class Dataset(torch.utils.data.Dataset):
         zip_path: Path,
         img_suffix: str,
         target_suffix: str,
+        check_empty_targets: bool,
+        img_size: Tuple[int, int],
+        scale_range: Tuple[float, float],
         ignore_idx: Optional[int] = None,
         transforms: Optional[Callable] = None,
         img_stem_suffix: str = "",
@@ -82,10 +85,18 @@ class Dataset(torch.utils.data.Dataset):
                 if target_filename not in target_zip.namelist():
                     continue
 
-                with target_zip.open(target_filename) as target_file:
-                    min_val, max_val = Image.open(target_file).getextrema()
-                    if min_val == max_val:
-                        continue
+                if check_empty_targets:
+                    with target_zip.open(target_filename) as target_file:
+                        target = Image.open(target_file)
+                        scale = min(scale_range) * max(img_size) / max(target.size)
+                        new_size = (
+                            round(target.size[0] * scale),
+                            round(target.size[1] * scale),
+                        )
+                        target = target.resize(new_size, Image.Resampling.NEAREST)
+                        min_val, max_val = target.getextrema()
+                        if min_val == max_val:
+                            continue
 
             self.imgs.append(img_info.filename)
             self.targets.append(target_filename)

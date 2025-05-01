@@ -1,14 +1,28 @@
+import jsonargparse._typehints as _t
 from types import MethodType
 from gitignore_parser import parse_gitignore
 import logging
 import torch
 from lightning.pytorch import cli
-from lightning.pytorch.callbacks import ModelSummary
+from lightning.pytorch.callbacks import ModelSummary, LearningRateMonitor
 from lightning.pytorch.loops.training_epoch_loop import _TrainingEpochLoop
 from lightning.pytorch.loops.fetchers import _DataFetcher, _DataLoaderIterDataFetcher
 
 from training.lightning_module import LightningModule
 from datasets.lightning_data_module import LightningDataModule
+
+
+_orig = _t.raise_union_unexpected_value
+
+
+def _raise_root(subtypes, val, vals):
+    for exc in reversed(vals):
+        if isinstance(exc, Exception):
+            raise exc
+    return _orig(subtypes, val, vals)
+
+
+_t.raise_union_unexpected_value = _raise_root
 
 
 def _should_check_val_fx(self: _TrainingEpochLoop, data_fetcher: _DataFetcher) -> bool:
@@ -105,9 +119,11 @@ def cli_main():
             "precision": "16-mixed",
             "log_every_n_steps": 1,
             "enable_model_summary": False,
-            "callbacks": [ModelSummary(max_depth=4)],
+            "callbacks": [
+                ModelSummary(max_depth=4),
+                LearningRateMonitor(logging_interval="epoch"),
+            ],
             "devices": 4,
-            "accumulate_grad_batches": 4,
             "strategy": "ddp_find_unused_parameters_true",
         },
     )
