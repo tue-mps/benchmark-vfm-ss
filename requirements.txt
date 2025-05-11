@@ -1,5 +1,5 @@
 gitignore_parser
-jsonargparse[signatures]
+jsonargparse[signatures]==4.38
 matplotlib
 wandb
 lightning

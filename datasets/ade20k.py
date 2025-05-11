@@ -11,17 +11,17 @@ from datasets.transforms import Transforms
 class ADE20K(LightningDataModule):
     def __init__(
         self,
-        root,
+        path,
         num_workers: int,
         img_size: tuple[int, int] = (224, 224),
-        batch_size: int = 4,
+        batch_size: int = 16,
         num_classes: int = 150,
         num_metrics: int = 1,
         scale_range=(0.5, 2.0),
         ignore_idx: int = 255,
     ) -> None:
         super().__init__(
-            root=root,
+            path=path,
             batch_size=batch_size,
             num_workers=num_workers,
             num_classes=num_classes,
@@ -38,8 +38,8 @@ class ADE20K(LightningDataModule):
         dataset_kwargs = {
             "img_suffix": ".jpg",
             "target_suffix": ".png",
-            "zip_path": Path(self.root, "ADEChallengeData2016.zip"),
-            "target_zip_path": Path(self.root, "ADEChallengeData2016.zip"),
+            "zip_path": Path(self.path, "ADEChallengeData2016.zip"),
+            "target_zip_path": Path(self.path, "ADEChallengeData2016.zip"),
             "class_mapping": get_ade20k_mapping(),
             "ignore_idx": self.ignore_idx,
             "img_size": self.img_size,

@@ -6,7 +6,7 @@ import lightning
 class LightningDataModule(lightning.LightningDataModule):
     def __init__(
         self,
-        root,
+        path,
         batch_size: int,
         num_workers: int,
         img_size: tuple[int, int],
@@ -19,7 +19,7 @@ class LightningDataModule(lightning.LightningDataModule):
     ) -> None:
         super().__init__()
 
-        self.root = root
+        self.path = path
         self.ignore_idx = ignore_idx
         self.scale_range = scale_range
         self.img_size = img_size
