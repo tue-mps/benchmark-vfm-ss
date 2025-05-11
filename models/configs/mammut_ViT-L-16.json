@@ -4,7 +4,7 @@
       "image_size": 224,
       "layers": 24,
       "width": 1024,
-      "patch_size": 14
+      "patch_size": 16
     },
     "text_cfg": {
       "context_length": 77,
