@@ -89,29 +89,25 @@ class Transforms(nn.Module):
         return img, target
 
     def forward(self, img, target: dict):
-        img_ = img.clone()
-        target_ = {
-            "masks": target["masks"].clone(),
-            "labels": target["labels"].clone(),
-        }
+        img_orig, target_orig = img, target
 
-        img_ = self.color_jitter(img_)
+        img = self.color_jitter(img)
 
-        img_, target_ = self.random_horizontal_flip(img_, target_)
+        img, target = self.random_horizontal_flip(img, target)
 
-        img_, target_ = self.scale_jitter(img_, target_)
+        img, target = self.scale_jitter(img, target)
 
-        img_, target_ = self.pad(img_, target_)
+        img, target = self.pad(img, target)
 
-        img_, target_ = self.random_crop(img_, target_)
+        img, target = self.random_crop(img, target)
 
-        mask_sums = target_["masks"].sum(dim=[-2, -1])
+        mask_sums = target["masks"].sum(dim=[-2, -1])
         non_empty_mask = mask_sums > 0
 
         if non_empty_mask.sum() == 0:
-            return self(img, target)
+            return self(img_orig, target_orig)
 
-        target_["masks"] = target_["masks"][non_empty_mask]
-        target_["labels"] = target_["labels"][non_empty_mask]
+        target["masks"] = target["masks"][non_empty_mask]
+        target["labels"] = target["labels"][non_empty_mask]
 
-        return img_, target_
+        return img, target
