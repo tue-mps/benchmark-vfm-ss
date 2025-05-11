@@ -10,7 +10,7 @@
     "context_length": 77,
     "vocab_size": 49408,
     "width": 512,
-    "heads": 12,
+    "heads": 8,
     "layers": 12
   }
 }
