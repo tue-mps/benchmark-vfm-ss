@@ -19,7 +19,9 @@ class Encoder(nn.Module):
         self.encoder = create_model_from_pretrained(
             model_name, pretrained, load_weights_only=False
         )[0].visual
-        del self.encoder.proj
+
+        if hasattr(self.encoder, "proj"):
+            del self.encoder.proj
 
         pixel_mean = torch.tensor(self.encoder.preprocess_cfg["mean"]).reshape(
             1, -1, 1, 1
