@@ -14,7 +14,7 @@ for p in Path(__file__).parent.joinpath("configs").glob("*.json"):
 
 
 class Encoder(nn.Module):
-    def __init__(self, model_name, pretrained, img_size: tuple[int, int], patch_size):
+    def __init__(self, model_name, pretrained, img_size: tuple[int, int], patch_size: int):
         super().__init__()
         self.encoder = create_model_from_pretrained(
             model_name, pretrained, load_weights_only=False

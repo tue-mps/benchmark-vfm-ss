@@ -1,4 +1,3 @@
-import math
 from models.encoder import Encoder
 import torch.nn as nn
 import torch
