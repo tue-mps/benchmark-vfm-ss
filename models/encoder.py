@@ -14,7 +14,9 @@ for p in Path(__file__).parent.joinpath("configs").glob("*.json"):
 
 
 class Encoder(nn.Module):
-    def __init__(self, model_name, pretrained, img_size: tuple[int, int], patch_size: int):
+    def __init__(
+        self, model_name, pretrained, img_size: tuple[int, int], patch_size: int
+    ):
         super().__init__()
         self.encoder = create_model_from_pretrained(
             model_name, pretrained, load_weights_only=False
@@ -158,14 +160,7 @@ class Encoder(nn.Module):
             x = self.encoder.patch_dropout(x)
             x = self.encoder.ln_pre(x)
             x = self.encoder.transformer(x)
-
-            if (
-                self.encoder.attn_pool is None and not self.encoder.final_ln_after_pool
-            ) or (
-                self.encoder.attn_pool is not None
-                and self.encoder.attn_pool_contrastive is not None
-            ):
-                x = self.encoder.ln_post(x)
+            x = self.encoder.ln_post(x)
 
         if x.dim() == 4:
             x = x.flatten(2).transpose(1, 2)
